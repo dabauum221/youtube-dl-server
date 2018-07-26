@@ -28,7 +28,7 @@
     "projects": [
       {
         "links": [],
-        "name": "web-nodejs-sample",
+        "name": "youtube-dl-server",
         "attributes": {
           "vcs.provider.name": [
             "git"
@@ -40,16 +40,16 @@
             "master"
           ],
           "git.repository.remotes": [
-            "https://github.com/che-samples/web-nodejs-sample.git"
+            "https://github.com/dabauum221/youtube-dl-server.git"
           ]
         },
         "type": "blank",
         "source": {
-          "location": "https://github.com/che-samples/web-nodejs-sample.git",
+          "location": "https://github.com/dabauum221/youtube-dl-server.git",
           "type": "git",
           "parameters": {}
         },
-        "path": "/web-nodejs-sample",
+        "path": "/youtube-dl-server",
         "problems": [],
         "mixins": [
           "pullrequest",
@@ -57,10 +57,10 @@
         ]
       }
     ],
-    "name": "node-ws",
+    "name": "youtube-dl-server",
     "commands": [
       {
-        "commandLine": "cd ${current.project.path}/app && node app.js",
+        "commandLine": "cd ${current.project.path} && node app/app.js",
         "name": "run",
         "attributes": {
           "previewUrl": "http://${server.port.3000}"
@@ -81,7 +81,7 @@
         },
         {
           "properties": {
-            "file": "/web-nodejs-sample/app/app.js"
+            "file": "/youtube-dl-server/app/app.js"
           },
           "id": "openFile"
         }
