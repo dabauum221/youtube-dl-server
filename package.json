@@ -11,6 +11,6 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.13.4",
-    "body-parser": "1.18.3"
+    "body-parser": "^1.18.3"
   }
 }
