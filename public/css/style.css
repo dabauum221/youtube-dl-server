@@ -8,9 +8,11 @@ body {
   margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
 }
+
 .container {
   width: 600px;
   margin: 0 auto;
+
 }
 fieldset {
   display: block;
@@ -29,6 +31,7 @@ fieldset {
   min-width: -webkit-min-content;
   padding: 30px;
 }
+
 .ghost-input, p {
   display: block;
   font-weight:300;
@@ -51,9 +54,11 @@ fieldset {
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
+
 .ghost-input:focus {
   border-bottom:1px solid #ddd;
 }
+
 .ghost-button {
   background-color: transparent;
   border:2px solid #ddd;
@@ -66,9 +71,11 @@ fieldset {
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
 }
+
 .ghost-button:hover {
   border:2px solid #515151;
 }
+
 p {
   color: #E64A19;
 }

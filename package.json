@@ -1,13 +1,15 @@
 {
   "name": "youtube-dl-server",
-  "version": "1.0.0",
   "description": "Youtube download server",
-  "main": "index.js",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dabauum221/youtube-dl-server.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Daniel Baum",
-  "license": "ISC",
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.13.4",
