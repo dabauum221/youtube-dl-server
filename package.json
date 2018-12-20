@@ -1,6 +1,7 @@
 {
   "name": "youtube-dl-server",
   "description": "Youtube download server",
+  "license": "UNLICENSED",
   "main": "server.js",
   "repository": {
     "type": "git",
@@ -11,8 +12,10 @@
   },
   "author": "Daniel Baum",
   "dependencies": {
+    "@angular/cli": "^6.1.1",
+    "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.13.4",
-    "body-parser": "^1.18.3"
+    "youtube-dl": "^1.12.2"
   }
 }
