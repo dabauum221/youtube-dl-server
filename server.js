@@ -2,6 +2,7 @@
 
 const bodyParser = require('body-parser');
 var express = require('express');
+var favicon = require('serve-favicon');
 var path = require('path');
 var fs = require('fs');
 var youtubedl = require('youtube-dl');
@@ -11,6 +12,7 @@ var app = express();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
