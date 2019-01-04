@@ -44,7 +44,7 @@ app.post('/', function (req, res) {
     console.log('Download started');
     console.log('filename: ' + info._filename);
     console.log('size: ' + info.size);
-    res.header('Content-Disposition', 'attachment; filename="' + info._filename + '"');
+    res.header('Content-Disposition', 'attachment; filename="' + encodeURIComponent(info._filename) + '"');
     res.header('Content-Type', 'video/mp4');
     res.header('Content-Length', info.size);
     video.pipe(res);
