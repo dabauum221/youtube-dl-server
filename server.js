@@ -1,10 +1,10 @@
-/*eslint-env node*/
+/* eslint-env node */
 
 const bodyParser = require('body-parser');
 var express = require('express');
 var favicon = require('serve-favicon');
 var path = require('path');
-var fs = require('fs');
+// var fs = require('fs');
 var youtubedl = require('youtube-dl');
 var app = express();
 // var spawn = require('child_process').spawn;
@@ -26,19 +26,10 @@ app.post('/', function (req, res) {
   // Get video info
   youtubedl.getInfo(req.body.url, function(err, info) {
     if (err) throw err;
-    console.log('id:', info.id);
-    console.log('title:', info.title);
-    console.log('url:', info.url);
-    console.log('thumbnail:', info.thumbnail);
-    console.log('description:', info.description);
-    console.log('filename:', info._filename);
-    console.log('format id:', info.format_id);
+    console.log('info:', info);
   });
-  var video = youtubedl(req.body.url);
-    // Optional arguments passed to youtube-dl.
-    // ['--format=18'],
-    // Additional options can be given for calling `child_process.execFile()`.
-    // { cwd: __dirname });
+  var options = ['--format=best'];
+  var video = youtubedl(req.body.url, options);
   // Will be called when the download starts.
   video.on('info', function(info) {
     console.log('Download started');
