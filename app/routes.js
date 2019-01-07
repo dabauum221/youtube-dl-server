@@ -9,7 +9,7 @@ module.exports = function (app) {
         res.send('test');
     });
     
-    // Get info from a YouTube video
+    // Get info from a YouTube video --------------------------------------------
     app.get('/api/info', function (req, res) {
         // console.log(req);
         // Respond with the video info as JSON
@@ -20,7 +20,7 @@ module.exports = function (app) {
         res.send('debug');
     });
     
-    // Get info from a YouTube video
+    // Get info from a YouTube video --------------------------------------------
     app.get('/api/info/:url', function (req, res) {
         console.log(req.params);
         // Respond with the video info as JSON
@@ -30,7 +30,7 @@ module.exports = function (app) {
         });
     });
     
-    // Download a YouTube video
+    // Download a YouTube video -------------------------------------------------
     app.get('/api/download/:url/:format', function (req, res) {
         var options = ['--format=' + req.params.format];
         var video = youtubedl(req.params.url, options);
