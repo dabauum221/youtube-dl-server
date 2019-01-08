@@ -1,0 +1,30 @@
+<!doctype html>
+
+<!-- Assign the angular module -->
+<html ng-app="youtubeDownloader">
+    <head>
+        <meta charset="utf-8">
+        <title>YouTube Downloader</title>
+        
+        <!-- load angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+        
+        <!-- load the controller -->
+        <script src="js/controller.js"></script>
+        
+        <!-- load the service -->
+        <script src="js/service.js"></script>
+        
+        <!-- load the main application -->
+        <script src="js/main.js"></script>
+    </head>
+    <body ng-controller="mainController">
+        <div>
+            <form>
+                <input type="text" ng-init="url='https://youtu.be/klx4oHvyncQ'" placeholder="Enter YouTube URL here" ng-model="url">
+                <button type="submit" ng-click="getInfo()">Get Info</button>
+            </form>
+            <input ng-model="info">
+        </div>
+    </body>
+</html>
