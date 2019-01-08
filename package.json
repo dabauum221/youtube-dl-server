@@ -17,6 +17,7 @@
     "ejs": "^2.6.1",
     "express": "^4.13.4",
     "serve-favicon": "^2.5.0",
-    "youtube-dl": "^1.12.2"
+    "youtube-dl": "^1.12.2",
+    "youtube-search": "^1.1.4"
   }
 }

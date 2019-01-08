@@ -13,7 +13,8 @@ app.use(bodyParser.json()); // parse application/json
 app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 
 // Routes =======================================================================
-require('./app/routes.js')(app);
+require('./app/routes/youtube-api.js')(app);
+require('./app/routes/youtube-dl.js')(app);
 
 // Listen =======================================================================
 app.listen(port, function () {

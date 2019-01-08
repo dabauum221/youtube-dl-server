@@ -7,5 +7,5 @@ serviceModule.factory('youtubeAPI', ['$http', '$log', function($http, $log) {
                     $log.info(data.data.fulltitle);
                 });
         }
-    }
+    };
 }]);

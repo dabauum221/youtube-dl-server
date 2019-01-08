@@ -20,11 +20,11 @@
     </head>
     <body ng-controller="mainController">
         <div>
-            <form>
-                <input type="text" ng-init="url='https://youtu.be/klx4oHvyncQ'" placeholder="Enter YouTube URL here" ng-model="url">
-                <button type="submit" ng-click="getInfo()">Get Info</button>
-            </form>
-            <input ng-model="info">
+            <input type="text" ng-model="searchValue">
+            <button ng-click="search()">Search</button>
+            <div ng-repeat="search in searches">
+                <button ng-click="download(search.link)">{{ search.title }}</button>
+            </div>
         </div>
     </body>
 </html>
