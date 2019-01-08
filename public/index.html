@@ -6,6 +6,14 @@
         <meta charset="utf-8">
         <title>YouTube Downloader</title>
         
+        <!-- SCROLLS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	   <style>
+		  html 					    { overflow-y:  scroll; }
+    	  body 					    { padding-top: 50px;   }
+       </style>
+        
         <!-- load angular -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
         
@@ -19,11 +27,28 @@
         <script src="js/main.js"></script>
     </head>
     <body ng-controller="mainController">
-        <div>
-            <input type="text" ng-model="searchValue">
-            <button ng-click="search()">Search</button>
+        <div class="container">
+            <div class="row">
+                <form>
+                    <div class="form-group">
+                        <input class="form-control input-lg text-center" type="text" ng-model="searchValue">
+                    </div>
+                    <p ng-show="loading">
+        				<span class="fa fa-spinner fa-spin fa-3x"></span>
+        			</p>
+                    <button ng-show="idle" type="submit" class="btn btn-primary btn-lg" ng-click="search()">Search</button>
+                </form>
+            </div>
             <div ng-repeat="search in searches">
-                <button ng-click="download(search.link)">{{ search.title }}</button>
+                <div class="form-group">
+                    <img class="btn" ng-click="download(search.link)" src="{{ search.thumbnails.default.url }}" alt="{{ search.title }}" height="{{ search.thumbnails.default.height }}" width="{{ search.thumbnails.default.width }}" />
+                    {{ search.title }}
+                    <!--div ng-repeat="format in search.formats">
+                        <label>
+                            <input type="checkbox">{{ format.format_note }}</input>
+                        </label>
+                    </div-->
+                </div>
             </div>
         </div>
     </body>
