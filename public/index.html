@@ -12,6 +12,7 @@
 	   <style>
 		  html 					    { overflow-y:  scroll; }
     	  body 					    { padding-top: 50px;   }
+    	  .invisible                 { background-color: rgba(238, 238, 238, 0.5); }
        </style>
         
         <!-- load angular -->
@@ -31,12 +32,12 @@
             <div class="row">
                 <form>
                     <div class="form-group">
-                        <input class="form-control input-lg text-center" type="text" ng-model="searchValue">
+                        <input class="form-control input-lg text-left" placeholder="Search" type="text" ng-model="searchValue">
                     </div>
                     <p ng-show="loading">
         				<span class="fa fa-spinner fa-spin fa-3x"></span>
         			</p>
-                    <button ng-show="idle" type="submit" class="btn btn-primary btn-lg" ng-click="search()">Search</button>
+                    <button ng-show="idle" type="submit" class="btn btn-primary btn-lg" ng-click="search()"><img src="./images/magnifying-glass.png" height="32" width="32"/></button>
                 </form>
             </div>
             <div ng-repeat="search in searches">
