@@ -5,9 +5,9 @@ var youtubedl = require('youtube-dl');
 module.exports = function (app) {
     
     // Test root ----------------------------------------------------------------
-    app.get('/', function (req, res) {
+    /* app.get('/', function (req, res) {
         res.send('test');
-    });
+    }); */
     
     // Get info from a YouTube video --------------------------------------------
     app.get('/api/info', function (req, res) {
@@ -22,10 +22,11 @@ module.exports = function (app) {
     
     // Get info from a YouTube video --------------------------------------------
     app.get('/api/info/:url', function (req, res) {
-        console.log(req.params);
+        console.log('URL: ' + decodeURIComponent(req.params.url));
         // Respond with the video info as JSON
-        youtubedl.getInfo(req.params.url, function(err, info) {
+        youtubedl.getInfo(decodeURIComponent(req.params.url), function(err, info) {
             // if (err) ;
+            console.log(info);
             res.send(info);
         });
     });

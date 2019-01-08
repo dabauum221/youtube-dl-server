@@ -17,5 +17,5 @@ require('./app/routes.js')(app);
 
 // Listen =======================================================================
 app.listen(port, function () {
-    console.log('Application listening on port ' + port);
+    console.log('Application listening on port %d', port);
 });
