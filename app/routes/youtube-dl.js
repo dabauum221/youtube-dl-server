@@ -45,7 +45,7 @@ module.exports = function (app) {
     });
     
     // Download a YouTube video -------------------------------------------------
-    app.get('/api/download/:url/:format', function (req, res) {
+    app.get('/api/download/:url/:watch/:format', function (req, res) {
         var options = ['--format=' + req.params.format];
         var video = youtubedl(req.params.url, options);
         // Will be called when the download starts.

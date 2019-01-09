@@ -28,8 +28,8 @@ controllerModule.controller('mainController', ['$window', '$scope', '$http', '$l
         // $window.location.href = '/api/download/' + encodeURIComponent(url);
         var a = document.createElement("a");
         document.body.appendChild(a);
-        a.download = title + '.mp4';
-        a.href = '/api/download/' + encodeURIComponent(url) + '/' + watch;        
+        if (watch == 'false') a.download = title + '.mp4';
+        a.href = '/api/download/' + encodeURIComponent(url) + '/' + watch;
         a.click();
         $scope.downloading[index] = false;
     };
