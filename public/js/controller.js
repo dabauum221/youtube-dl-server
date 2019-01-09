@@ -2,17 +2,15 @@ var controllerModule = angular.module('controllerModule', []);
 controllerModule.controller('mainController', ['$window', '$scope', '$http', '$log', '$q', 'youtubeAPI', function($window, $scope, $http, $log, $q, youtubeAPI) {
     $scope.searches = [];
     $scope.loading = false;
-    $scope.idle = true;
+    $scope.downloading = [];
     
     $scope.search = function() {
         $scope.searches = {};
         $scope.loading = true;
-        $scope.idle = false;
         youtubeAPI.search(encodeURIComponent($scope.searchValue))
             .then(function(result) {
                 $scope.searches = angular.fromJson(result);
                 $scope.loading = false;
-                $scope.idle = true;
             });
     };
     
@@ -24,16 +22,15 @@ controllerModule.controller('mainController', ['$window', '$scope', '$http', '$l
             });
     };
     
-    $scope.download = function(url) {
-        $scope.loading = true;
-        $log.info('Submitting %s to the server for youtube download', encodeURIComponent(url));
-        $window.location.href = '/api/download/' + encodeURIComponent(url);
-        $scope.loading = false;
-        // $http.get('/api/download/' + encodeURIComponent(url))
-            // .then( function (response, status, headers, config) {
-                // $log.info(headers);
-                // var file = new Blob([response.data], { type: "video/mp4" });
-                // $window.location.href = encodeURIComponent(url);
-            // });
+    $scope.download = function(url, title, index, watch) {
+        $scope.downloading[index] = true;
+        $log.info('Downloading %s', encodeURIComponent(url));
+        // $window.location.href = '/api/download/' + encodeURIComponent(url);
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.download = title + '.mp4';
+        a.href = '/api/download/' + encodeURIComponent(url) + '/' + watch;        
+        a.click();
+        $scope.downloading[index] = false;
     };
 }]);

@@ -27,29 +27,21 @@ module.exports = function (app) {
     });
     
     // Download a YouTube video (Default Format) --------------------------------
-    app.get('/api/download/:url', function (req, res, next) {
+    app.get('/api/download/:url/:watch', function (req, res, next) {
         console.log('Downloading using url: ' + decodeURIComponent(req.params.url));
-        // Get the default format from the info
-        // youtubedl.getInfo(decodeURIComponent(req.params.url), function(err, info) {
-            // console.log('Content type should be %s', info.ext);
-            // var options = ['--format=' + info.format.split(' ')[0]];
-            var video = youtubedl(req.params.url/*, options*/);
-            video.on('error', function error(err) {
-                // console.error('error 2:', err);
-                // throw new Error(err);
-                next(err);
-            });
-            // Will be called when the download starts.
-            video.on('info', function(info) {
-                // if (err) return console.error(err);
-                //try {
-                    res.header('Content-Disposition', 'attachment; filename="' + encodeURIComponent(info._filename) + '"');
-                    res.header('Content-Type', 'video/mp4');
-                    res.header('Content-Length', info.size);
-                    video.pipe(res);
-                //};
-            });
-        // });
+
+        var video = youtubedl(req.params.url/*, options*/);
+        video.on('error', function error(err) {
+            next(err);
+        });
+        // Will be called when the download starts.
+        video.on('info', function(info) {
+            if (req.params.watch == 'true') res.header('Content-Disposition', 'inline; filename="' + info._filename + '"');
+            else res.header('Content-Disposition', 'attachment; filename="' + info._filename + '"');
+            res.header('Content-Type', 'video/mp4');
+            res.header('Content-Length', info.size);
+            video.pipe(res);
+        });
     });
     
     // Download a YouTube video -------------------------------------------------
