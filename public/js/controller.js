@@ -1,5 +1,5 @@
 var controllerModule = angular.module('controllerModule', []);
-controllerModule.controller('mainController', ['$window', '$scope', '$http', '$log', 'youtubeAPI', function($window, $scope, $http, $log, youtubeAPI) {
+controllerModule.controller('mainController', ['$window', '$scope', '$http', '$log', '$q', 'youtubeAPI', function($window, $scope, $http, $log, $q, youtubeAPI) {
     $scope.searches = [];
     $scope.loading = false;
     $scope.idle = true;
@@ -20,9 +20,7 @@ controllerModule.controller('mainController', ['$window', '$scope', '$http', '$l
         // $scope.loading = true;
         youtubeAPI.info(encodeURIComponent(url))
             .then(function(result) {
-                $log.info(angular.fromJson(result));
                 // $scope.loading = false;
-                return angular.fromJson(result);
             });
     };
     

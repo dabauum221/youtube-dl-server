@@ -21,7 +21,7 @@ module.exports = function (app) {
         // Respond with the video info as JSON
         youtubedl.getInfo(decodeURIComponent(req.params.url), function(err, info) {
             if (err) next(err);
-            console.log(info);
+            // console.log(info);
             res.send(info);
         });
     });
