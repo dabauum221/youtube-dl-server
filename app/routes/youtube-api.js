@@ -4,7 +4,7 @@ var search = require('youtube-search');
 var opts = {
   maxResults: 10,
   type: 'video',
-  key: ''
+  key: process.env.GOOGLE_API_KEY
 };
 
 // Register the API routes
