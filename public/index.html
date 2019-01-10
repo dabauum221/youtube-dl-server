@@ -4,12 +4,13 @@
 <html ng-app="youtubeDownloader">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
         <title>YouTube Downloader</title>
         
         <!-- SCROLLS -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-	   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	   <style>
+	    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	    <style>
 		  html 					    { overflow-y:  scroll; }
     	  body 					    { padding-top: 50px;   }
     	  .search-item {
@@ -19,10 +20,10 @@
     	      margin-bottom: 10px;
     	      box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3);
     	  }
-       </style>
+        </style>
         
         <!-- load angular -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
         
         <!-- load the controller -->
         <script src="js/controller.js"></script>
@@ -38,11 +39,11 @@
             <div class="row">
                 <form>
                     <div>
-                        <input style="width: 85%; float: left;" class="input-lg text-left" placeholder="Search" type="text" ng-model="searchValue">
-                        <p ng-show="loading" style="width: 14%; float: right;">
+                        <input style="width: 80%; float: left;" class="input-lg text-left" placeholder="Search" type="text" ng-model="searchValue">
+                        <p ng-show="loading" style="width: 19%; float: right;">
             				<span class="fa fa-spinner fa-spin fa-3x"></span>
             			</p>
-                        <button ng-show="!loading" type="submit" style="width: 14%; float: right;" class="btn btn-primary btn-lg" ng-click="search()">Search</button>
+                        <button ng-show="!loading" type="submit" style="width: 19%; float: right;" class="btn btn-primary btn-lg" ng-click="search()">Search</button>
                     </div>
                 </form>
             </div>

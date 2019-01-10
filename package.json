@@ -18,6 +18,8 @@
     "express": "^4.13.4",
     "serve-favicon": "^2.5.0",
     "youtube-dl": "^1.12.2",
-    "youtube-search": "^1.1.4"
+    "youtube-search": "^1.1.4",
+    "valid-url": "^1.0.9",
+    "utf8": "^3.0.0"
   }
 }

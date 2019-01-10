@@ -1,56 +1,56 @@
 // Set up the variables =========================================================
 var youtubedl = require('youtube-dl');
+var validUrl = require('valid-url');
+var utf8 = require('utf8');
 
 // Register the API routes
 module.exports = function (app) {
     
     // Get info from a YouTube video --------------------------------------------
-    app.get('/api/info', function (req, res) {
-        console.log('URL: ' + decodeURIComponent(req.body.url));
+    app.get('/api/info', function (req, res, next) {
+        if(!req.query.url) return next('ERROR: \'url\' query string param is required');
+        
+        var url = decodeURIComponent(req.query.url);
+        
+        // If url value in query string params is invalid, return internal server error
+        if (!validUrl.isUri(url)){
+            return next('ERROR: ' + url + ' is not a valid URL');
+        }
+        
         // Respond with the video info as JSON
-        //youtubedl.getInfo(decodeURIComponent(req.params.url), function(err, info) {
-            // if (err) ;
-            //console.log(info);
-            //res.send(info);
-        //});
-    });
-    
-    // Get info from a YouTube video --------------------------------------------
-    app.get('/api/info/:url', function (req, res, next) {
-        console.log('URL: ' + decodeURIComponent(req.params.url));
-        // Respond with the video info as JSON
-        youtubedl.getInfo(decodeURIComponent(req.params.url), function(err, info) {
-            if (err) next(err);
-            // console.log(info);
+        youtubedl.getInfo(url, function(err, info) {
+            if (err) return next(err);
             res.send(info);
         });
     });
     
-    // Download a YouTube video (Default Format) --------------------------------
-    app.get('/api/download/:url/:watch', function (req, res, next) {
-        console.log('Downloading using url: ' + decodeURIComponent(req.params.url));
-
-        var video = youtubedl(req.params.url/*, options*/);
-        video.on('error', function error(err) {
-            next(err);
-        });
-        // Will be called when the download starts.
-        video.on('info', function(info) {
-            if (req.params.watch == 'true') res.header('Content-Disposition', 'inline; filename="' + info._filename + '"');
-            else res.header('Content-Disposition', 'attachment; filename="' + info._filename + '"');
-            res.header('Content-Type', 'video/mp4');
-            res.header('Content-Length', info.size);
-            video.pipe(res);
-        });
-    });
-    
     // Download a YouTube video -------------------------------------------------
-    app.get('/api/download/:url/:watch/:format', function (req, res) {
-        var options = ['--format=' + req.params.format];
-        var video = youtubedl(req.params.url, options);
+    app.get('/api/download', function(req, res, next){
+        if(!req.query.url) return next('ERROR: \'url\' query string param is required');
+        
+        var url = decodeURIComponent(req.query.url);
+        
+        // If url value in query string params is invalid, return internal server error
+        if (!validUrl.isUri(url)){
+            return next('ERROR: ' + url + ' is not a valid URL');
+        }
+        
+        var watch = decodeURIComponent(req.query.watch);
+        var format = decodeURIComponent(req.query.format);
+        
+        console.log('INFO: Downloading using url \'%s\'', url);
+        
+        var options = ((format) ? [] : ['--format=' + format]);
+        var video = youtubedl(url, options);
+        
+        // Will be called on video load error
+        video.on('error', function error(err) {
+            return next(err);
+        });
+        
         // Will be called when the download starts.
         video.on('info', function(info) {
-            res.header('Content-Disposition', 'attachment; filename="' + encodeURIComponent(info._filename) + '"');
+            res.header('Content-Disposition', (watch == 'true' ? 'inline' : 'attachment') + '; filename="' + utf8.encode(info._filename) + '"');
             res.header('Content-Type', 'video/mp4');
             res.header('Content-Length', info.size);
             video.pipe(res);
