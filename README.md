@@ -10,6 +10,6 @@ node server.js
 
 # Docker
 
-docker run -p 8080:8080 --env GOOGLE_API_KEY=? dabauum221/youtube-dl-server:latest
+docker run -d --name youtube-dl-server -p 8080:8080 --env GOOGLE_API_KEY=? dabauum221/youtube-dl-server:latest
 
 Replace ? with actual google API key for searching
