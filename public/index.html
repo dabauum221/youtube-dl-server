@@ -25,6 +25,9 @@
         <!-- load angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
         
+        <!-- load clipboard copying module -->
+        <script src="js/ngClipboard.js"></script>
+        
         <!-- load the controller -->
         <script src="js/controller.js"></script>
         
@@ -65,19 +68,30 @@
         						{{ search.description }}
         					</div>
         				</div>
-        				<div class="row">
-        				    <div class="form-group col-md-2 col-md-offset-10">
-        						<div class="btn-group" ng-show="!downloading[$index]">
-            						<button class="btn btn-warning" ng-click="download(search.link, search.title, $index, true)">
+        				<div class="row" ng-init="info(search, $index)">
+        				    <p ng-show="search.getting_info" style="width: 19%; float: right;">
+                				<span class="fa fa-spinner fa-spin fa-3x"></span>
+                			</p>
+                			<div class="alert alert-danger" role="alert" ng-show="search.error">
+                                {{ search.errorMsg }}
+                            </div>
+        				    <div class="form-group col-md-2 col-md-offset-10" ng-show="!search.getting_info && !search.error">
+        						<div>
+        						    <select ng-model="search.selectedFormat" ng-options="x for (x, y) in search.formats" class="form-control form-control-sm"></select>
+        						</div>
+        						<div class="btn-group" ng-show="!iPhone()">
+            						<button class="btn btn-warning" ng-click="download(search, true)">
             							Watch
             						</button>
-            						<button class="btn btn-success" ng-click="download(search.link, search.title, $index, false)">
+            						<button class="btn btn-success" ng-click="download(search, false)">
             							Get
             						</button>
         						</div>
-        						<p ng-show="downloading[$index]">
-                    				<span class="fa fa-spinner fa-spin fa-2x"></span>
-                    			</p>
+        						<div class="btn-group" ng-show="iPhone()">
+            						<button class="btn btn-success" ng-click="toClipboard(getDownloadURL(search))">
+            							Copy
+            						</button>
+        						</div>
         					</div>
         				</div>
                     </div>

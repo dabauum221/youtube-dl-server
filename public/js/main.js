@@ -1,1 +1,1 @@
-angular.module('youtubeDownloader', ['controllerModule', 'serviceModule']);
+angular.module('youtubeDownloader', ['controllerModule', 'serviceModule', 'ngClipboard']);

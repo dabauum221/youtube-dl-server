@@ -1,5 +1,5 @@
 // Set up the variables =========================================================
-var youtubedl = require('youtube-dl');
+var ytdl = require('youtube-dl');
 var validUrl = require('valid-url');
 var utf8 = require('utf8');
 
@@ -18,8 +18,11 @@ module.exports = function (app) {
         }
         
         // Respond with the video info as JSON
-        youtubedl.getInfo(url, function(err, info) {
-            if (err) return next(err);
+        ytdl.getInfo(url, function(err, info) {
+            if (err) {
+                console.error('ERROR: /api/info ' + err);
+                return next(err);
+            }
             res.send(info);
         });
     });
@@ -37,21 +40,25 @@ module.exports = function (app) {
         
         var watch = decodeURIComponent(req.query.watch);
         var format = decodeURIComponent(req.query.format);
+        var title = decodeURIComponent(req.query.title);
+        var ext = decodeURIComponent(req.query.ext);
+
+        var options = format && format !== 'undefined' && format.length > 0 ? ['-f', format] : [];
         
-        console.log('INFO: Downloading using url \'%s\'', url);
-        
-        var options = ((format) ? [] : ['--format=' + format]);
-        var video = youtubedl(url, options);
+        console.log('INFO: Downloading using url \'%s\' and options %s', url, options);
+
+        var video = ytdl(url, options);
         
         // Will be called on video load error
         video.on('error', function error(err) {
+            console.error('ERROR: /api/download ' + err);
             return next(err);
         });
         
         // Will be called when the download starts.
         video.on('info', function(info) {
-            res.header('Content-Disposition', (watch == 'true' ? 'inline' : 'attachment') + '; filename="' + utf8.encode(info._filename) + '"');
-            res.header('Content-Type', 'video/mp4');
+            res.header('Content-Disposition', (watch === 'true' ? 'inline' : 'attachment') + '; filename="' + utf8.encode(title + '.' + ext) + '"');
+            res.header('Content-Type', 'video/' + ext);
             res.header('Content-Length', info.size);
             video.pipe(res);
         });
