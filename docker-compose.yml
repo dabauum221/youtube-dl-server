@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    build: ./
+    image: youtube-dl-server
+    expose:
+      - 8080
+    container_name: youtube-dl-server
+    environment:
+     - GOOGLE_API_KEY=?
+    restart: unless-stopped
